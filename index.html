@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Sharing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <h1>Recipe Sharing</h1>
+        <ul>
+            <li><a href="#add-recipe">Add Recipe</a></li>
+            <li><a href="#recipe-list">Recipe List</a></li>
+        </ul>
+    </nav>
+
+    <section id="add-recipe">
+        <h2>Add a New Recipe</h2>
+        <input type="text" id="recipe-name" placeholder="Recipe Name">
+        <textarea id="recipe-description" placeholder="Recipe Description"></textarea>
+        <button id="add-button">Add Recipe</button>
+    </section>
+
+    <section id="recipe-list">
+        <h2>Recipe List</h2>
+        <ul id="recipes"></ul>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
