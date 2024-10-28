@@ -4,9 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Sharing</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+   
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(hey1.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+header button {
+    background-color: #ff4757;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+header button:hover {
+    background-color: #ff6b81;
+}
+
+
+nav {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav h1 {
+    color: #0a0c0c;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #0056b3;
+}
+
+
+section {
+    width: 100%;
+    max-width: 600px;
+    background-color: transparent;
+    backdrop-filter: blur(40px);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    font-size: 24px;
+    color: #130a0a;
+    margin-bottom: 15px;
+}
+
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+    height: 80px;
+}
+
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+
+#recipe-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+#recipe-list li {
+    background-color: #e9f5e9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+</style>
+
 <body>
+    <header>
+        <button onclick="logout()">Logout</button>
+    </header>
+
     <nav>
         <h1>Recipe Sharing</h1>
         <ul>
@@ -24,9 +168,83 @@
 
     <section id="recipe-list">
         <h2>Recipe List</h2>
+        <button id="clear-button">Clear All Recipes</button>
         <ul id="recipes"></ul>
     </section>
 
-    <script src="script.js"></script>
+    <script>
+function logout() {
+    alert("Logging out...");
+    sessionStorage.removeItem("loggedInUser");
+    window.location.href = "index1.html";
+}
+
+let recipes = [];
+
+
+function renderRecipes() {
+    const recipeList = document.getElementById("recipes");
+    recipeList.innerHTML = ""; 
+
+    recipes.forEach((recipe, index) => {
+        const listItem = document.createElement("li");
+
+        listItem.innerHTML = `
+            <strong>${recipe.name}</strong>: ${recipe.description}
+            <button onclick="editRecipe(${index})">Edit</button>
+            <button onclick="deleteRecipe(${index})">Delete</button>
+        `;
+
+        recipeList.appendChild(listItem);
+    });
+}
+
+
+document.getElementById("add-button").addEventListener("click", function () {
+    const recipeName = document.getElementById("recipe-name").value;
+    const recipeDescription = document.getElementById("recipe-description").value;
+
+    if (recipeName && recipeDescription) {
+        recipes.push({ name: recipeName, description: recipeDescription });
+        renderRecipes();
+
+      
+        document.getElementById("recipe-name").value = "";
+        document.getElementById("recipe-description").value = "";
+    } else {
+        alert("Please fill in both the recipe name and description.");
+    }
+});
+
+
+function editRecipe(index) {
+    const recipe = recipes[index];
+    const newName = prompt("Edit Recipe Name:", recipe.name);
+    const newDescription = prompt("Edit Recipe Description:", recipe.description);
+
+    if (newName && newDescription) {
+        recipes[index] = { name: newName, description: newDescription };
+        renderRecipes();
+    } else {
+        alert("Please enter both a name and description.");
+    }
+}
+
+function deleteRecipe(index) {
+    recipes.splice(index, 1);
+    renderRecipes();
+}
+
+
+document.getElementById("clear-button").addEventListener("click", function () {
+    if (confirm("Are you sure you want to clear all recipes?")) {
+        recipes = [];
+        renderRecipes();
+    }
+});
+
+
+renderRecipes();
+    </script>
 </body>
 </html>
