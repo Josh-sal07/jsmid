@@ -4,103 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    
 </head>
 <style>
     * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
 
-body {
-    font-family: Arial, sans-serif;
-    background-image: url(hey.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url(hey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background-color: transparent;
-    backdrop-filter: blur(40px);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+    .login-container {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        background-color: transparent;
+        backdrop-filter: blur(40px);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
 
-.login-container h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
+    .login-container h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
 
-.login-container label {
-    display: block;
-    text-align: left;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-}
+    .login-container p {
+        color: #555;
+        font-size: 14px;
+        margin-bottom: 30px;
+        line-height: 1.5;
+    }
 
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
+    .login-container label {
+        display: block;
+        text-align: left;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 5px;
+    }
 
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #ffffff;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
 
-.login-container button:hover {
-    background-color: #45a049;
-}
+    .login-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #ffffff;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-.login-container .actions {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-}
+    .login-container button:hover {
+        background-color: #45a049;
+    }
 
-.login-container .actions a {
-    font-size: 14px;
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s;
-}
+    .login-container .actions {
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+    }
 
-.login-container .actions a:hover {
-    color: #0056b3;
-}
+    .login-container .actions a {
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
 
+    .login-container .actions a:hover {
+        color: #0056b3;
+    }
+
+    .recipe-container {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(40px);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .recipe-container h3 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .recipe-container label {
+        display: block;
+        text-align: left;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .recipe-container input[type="text"],
+    .recipe-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .recipe-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #ffffff;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .recipe-container button:hover {
+        background-color: #45a049;
+    }
+   
 </style>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Welcome Share Your Recipe!</h2>
+        <p class="padi">Excited to share your favorite recipe? We’d love to hear it!
+            Please enter your credentials to log in to your account.
+        </p>
+        
         <form id="loginForm" onsubmit="return login(event)">
             <label for="username">Username:</label>
-            <input type="text" id="username" required>
+            <input type="text" id="username" required placeholder="Enter your username">
 
             <label for="password">Password:</label>
-            <input type="password" id="password" required>
+            <input type="password" id="password" required placeholder="Enter your password">
 
             <button type="submit">Login</button>
             <div class="actions">
@@ -110,6 +172,8 @@ body {
         </form>
     </div>
 
+  
+
     <script>
         function login(event) {
             event.preventDefault();
@@ -117,17 +181,29 @@ body {
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            
             const storedAccount = JSON.parse(localStorage.getItem(username));
 
-           
             if (storedAccount && storedAccount.password === password) {
                 sessionStorage.setItem("loggedInUser", username);
                 alert("Login successful!");
-                window.location.href = "index.html";  
+                window.location.href = "index2.html";  
             } else {
                 alert("Invalid username or password.");
             }
+        }
+
+        function shareRecipe(event) {
+            event.preventDefault();
+
+            const recipeName = document.getElementById("recipeName").value;
+            const ingredients = document.getElementById("ingredients").value;
+            const instructions = document.getElementById("instructions").value;
+
+            // Here you can save or display the recipe details.
+            alert(`Thank you for sharing your recipe: ${recipeName}!`);
+
+            // Clear form fields after submission
+            document.getElementById("recipeForm").reset();
         }
     </script>
 </body>

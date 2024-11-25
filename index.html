@@ -4,148 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Sharing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(hey1.avif);
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin: 20px;
+        }
+
+        header button {
+            background-color: #060505;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        header button:hover {
+            background-color: #fbf3f4;
+            color: #0a0c0c;
+        }
+
+        nav {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            margin: 0;
+        }
+
+        nav h1 {
+            color: #0a0c0c;
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #0056b3;
+        }
+
+        /* Hamburger button styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: #333;
+        }
+
+        /* Collapsible menu styles */
+        .menu {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.9);
+                text-align: left;
+                padding: 10px 0;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul a {
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #ccc;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        section {
+            width: 100%;
+            max-width: 600px;
+            background-color: transparent;
+            backdrop-filter: blur(40px);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            font-size: 24px;
+            color: #130a0a;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #recipe-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #recipe-list li {
+            background-color: #e9f5e9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+    </style>
 </head>
-<style>
-   
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-body {
-    font-family: Arial, sans-serif;
-    background-image: url(hey1.avif);
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-
-header {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-}
-
-header button {
-    background-color: #ff4757;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-header button:hover {
-    background-color: #ff6b81;
-}
-
-
-nav {
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-nav h1 {
-    color: #0a0c0c;
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: #0056b3;
-}
-
-
-section {
-    width: 100%;
-    max-width: 600px;
-    background-color: transparent;
-    backdrop-filter: blur(40px);
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-section h2 {
-    font-size: 24px;
-    color: #130a0a;
-    margin-bottom: 15px;
-}
-
-
-input[type="text"], textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-textarea {
-    resize: vertical;
-    height: 80px;
-}
-
-
-button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-
-#recipe-list ul {
-    list-style: none;
-    padding: 0;
-}
-
-#recipe-list li {
-    background-color: #e9f5e9;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-</style>
-
 <body>
     <header>
         <button onclick="logout()">Logout</button>
@@ -153,7 +201,12 @@ button:hover {
 
     <nav>
         <h1>Recipe Sharing</h1>
-        <ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul id="nav-links">
             <li><a href="#add-recipe">Add Recipe</a></li>
             <li><a href="#recipe-list">Recipe List</a></li>
         </ul>
@@ -173,78 +226,84 @@ button:hover {
     </section>
 
     <script>
-function logout() {
+        function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("active");
+  }
+  function logout() {
     alert("Logging out...");
     sessionStorage.removeItem("loggedInUser");
     window.location.href = "index1.html";
 }
+  
+        function logout() {
+            alert("Logging out...");
+            sessionStorage.removeItem("loggedInUser");
+            window.location.href = "index1.html";
+        }
 
-let recipes = [];
+        let recipes = [];
 
+        function renderRecipes() {
+            const recipeList = document.getElementById("recipes");
+            recipeList.innerHTML = "";
 
-function renderRecipes() {
-    const recipeList = document.getElementById("recipes");
-    recipeList.innerHTML = ""; 
+            recipes.forEach((recipe, index) => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <strong>${recipe.name}</strong>: ${recipe.description}
+                    <button onclick="editRecipe(${index})">Edit</button>
+                    <button onclick="deleteRecipe(${index})">Delete</button>
+                `;
+                recipeList.appendChild(listItem);
+            });
+        }
 
-    recipes.forEach((recipe, index) => {
-        const listItem = document.createElement("li");
+        document.getElementById("add-button").addEventListener("click", function () {
+            const recipeName = document.getElementById("recipe-name").value;
+            const recipeDescription = document.getElementById("recipe-description").value;
 
-        listItem.innerHTML = `
-            <strong>${recipe.name}</strong>: ${recipe.description}
-            <button onclick="editRecipe(${index})">Edit</button>
-            <button onclick="deleteRecipe(${index})">Delete</button>
-        `;
+            if (recipeName && recipeDescription) {
+                recipes.push({ name: recipeName, description: recipeDescription });
+                renderRecipes();
+                document.getElementById("recipe-name").value = "";
+                document.getElementById("recipe-description").value = "";
+            } else {
+                alert("Please fill in both the recipe name and description.");
+            }
+        });
 
-        recipeList.appendChild(listItem);
-    });
-}
+        function editRecipe(index) {
+            const recipe = recipes[index];
+            const newName = prompt("Edit Recipe Name:", recipe.name);
+            const newDescription = prompt("Edit Recipe Description:", recipe.description);
 
+            if (newName && newDescription) {
+                recipes[index] = { name: newName, description: newDescription };
+                renderRecipes();
+            } else {
+                alert("Please enter both a name and description.");
+            }
+        }
 
-document.getElementById("add-button").addEventListener("click", function () {
-    const recipeName = document.getElementById("recipe-name").value;
-    const recipeDescription = document.getElementById("recipe-description").value;
+        function deleteRecipe(index) {
+            recipes.splice(index, 1);
+            renderRecipes();
+        }
 
-    if (recipeName && recipeDescription) {
-        recipes.push({ name: recipeName, description: recipeDescription });
+        document.getElementById("clear-button").addEventListener("click", function () {
+            if (confirm("Are you sure you want to clear all recipes?")) {
+                recipes = [];
+                renderRecipes();
+            }
+        });
+
+        function toggleMenu() {
+            const menu = document.getElementById("nav-links");
+            menu.classList.toggle("show");
+        }
+
         renderRecipes();
-
-      
-        document.getElementById("recipe-name").value = "";
-        document.getElementById("recipe-description").value = "";
-    } else {
-        alert("Please fill in both the recipe name and description.");
-    }
-});
-
-
-function editRecipe(index) {
-    const recipe = recipes[index];
-    const newName = prompt("Edit Recipe Name:", recipe.name);
-    const newDescription = prompt("Edit Recipe Description:", recipe.description);
-
-    if (newName && newDescription) {
-        recipes[index] = { name: newName, description: newDescription };
-        renderRecipes();
-    } else {
-        alert("Please enter both a name and description.");
-    }
-}
-
-function deleteRecipe(index) {
-    recipes.splice(index, 1);
-    renderRecipes();
-}
-
-
-document.getElementById("clear-button").addEventListener("click", function () {
-    if (confirm("Are you sure you want to clear all recipes?")) {
-        recipes = [];
-        renderRecipes();
-    }
-});
-
-
-renderRecipes();
     </script>
 </body>
 </html>

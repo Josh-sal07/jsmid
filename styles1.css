@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+section {
+    padding: 20px;
+}
+
+button {
+    background-color: #247726;
+    color: white;
+    border-radius: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.recipe-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+h2{
+    text-align: center;
+
+}
+#add-button{
+    padding-left: 30px;
+}
+

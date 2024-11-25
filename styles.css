@@ -1,50 +1,246 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-}
-
-nav {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-section {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url(hey.jpg);
+  }
+  
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: transparent;
+    color: #0b0b0b;
+    position: fixed;
+    left: -250px;
+    top: 0;
+    transition: 0.3s;
+    overflow-y: auto;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  .sidebar-header {
     padding: 20px;
-}
-
-button {
-    background-color: #247726;
-    color: white;
-    border-radius: 30px;
-    padding: 10px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-.recipe-item {
+    background-color: #444;
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
-}
-h2{
+    align-items: center;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 20px;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+  }
+  .sidebar-header {
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: #040303;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+  }
+  
+  .sidebar-menu li {
+    padding: 15px 20px;
+  }
+  
+  .sidebar-menu li a {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #080606;
+    text-decoration: none;
+  }
+  
+  .sidebar-menu li a:hover {
+    background-color: #555;
+  }
+  
+  .content {
+    margin-left: 0;
+    padding: 10px;
+    color:#121412;
+    transition: margin-left 0.3s;
+    background-color: transparent;
+  }
+  
+  .content h1 {
+    font-size: 24px;
+  }
+  
+  .open-btn {
+    background-color: transparent;
+    color: #040303;
+    border-radius: 8px;
+    padding: none;
+    width: 50px;
+    height: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .open-btn:hover {
+    background-color: #555;
+  }
+    
+  h1{
+    font-size: 24px;
+    font-weight: 1000;
     text-align: center;
+    color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+  }
+  
+.footer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: transparent;
+    width: 100px;
+    height: 30px;
+  }
+  
+  .logout-btn {
+    background-color: transparent; 
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    position: fixed;
+  }
+  
+  .logout-btn:hover {
+    background-color: #423d3d; 
+  }
+  p{
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  h2{
+    text-align: center;
+    color: #060505;
+    padding-bottom: 10px;
+  }
+  h3{
+    text-align: center;
+    color: #fff;
+    padding-bottom: 10px;
+  }
+  .team-member img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  .team-member {
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+    margin: 10px;
+  }
+  .cta {
+    text-align: center;
+    background-color: #2c352c;
+    padding: 40px 20px;
+  }
 
-}
-#add-button{
-    padding-left: 30px;
-}
+.home-welcome {
+    text-align: center;
+    background-color: transparent;
+    color: white;
+    padding: 40px 20px;
+  }
+  
+  .home-welcome h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+  }
+  
+  .cta-btn {
+    background-color: white;
+    color: #121412;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+  }
+  
+  .cta-btn:hover {
+    background-color: #4b504c;
+    color: white;
+  }
+  
+  .home-services {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+  
+  .service-feature {
+    width: 30%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .home-why-choose {
+    background-color:  transparent;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .home-why-choose ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .home-why-choose li {
+    font-size: 1.1em;
+    margin: 10px 0;
+  }
+  
+  .home-testimonials {
+    background-color:  transparent;
+    padding: 30px;
+  }
+  
+  .testimonial {
+    
+    font-style: italic;
+  }
+  
+  .cta {
+    text-align: center;
+    padding: 40px 20px;
+    background-color:  transparent;
+    color: white;
+  }
+  
+  .service-btn {
+    text-decoration: none;
+    color: #273a28;
+    font-weight: bold;
+  }
+  
+  .service-btn:hover {
+    color: #4b514c;
+  }
+  
