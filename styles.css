@@ -7,6 +7,7 @@
   body {
     font-family: Arial, sans-serif;
     background-image: url(hey.jpg);
+    color:#040303;
   }
   
   .sidebar {
@@ -54,6 +55,8 @@
   .sidebar-menu {
     list-style: none;
     padding: 20px 0;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
   }
   
   .sidebar-menu li {
@@ -85,13 +88,17 @@
   
   .open-btn {
     background-color: transparent;
-    color: #040303;
+   
+    color: #030202;
     border-radius: 8px;
     padding: none;
     width: 50px;
     height: 30px;
     cursor: pointer;
     margin-bottom: 20px;
+    border: none;
+    font-size: 3em;
+    
   }
   
   .open-btn:hover {
@@ -118,19 +125,21 @@
   
   .logout-btn {
     background-color: transparent; 
-    color: #fff;
+    color: #0c0b0b;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 5px;
     position: fixed;
+    margin-right: 10px;
+    border: none;
+    backdrop-filter: blur(50px);
   }
   
   .logout-btn:hover {
-    background-color: #423d3d; 
+    background-color: #7c7676; 
   }
   p{
-    color: white;
     text-align: center;
     margin-bottom: 10px;
   }
@@ -164,7 +173,7 @@
 .home-welcome {
     text-align: center;
     background-color: transparent;
-    color: white;
+    color: rgb(13, 10, 10);
     padding: 40px 20px;
   }
   
@@ -231,7 +240,7 @@
     text-align: center;
     padding: 40px 20px;
     background-color:  transparent;
-    color: white;
+    color: rgb(11, 9, 9);
   }
   
   .service-btn {
