@@ -73,3 +73,21 @@ document.getElementById("clear-button").addEventListener("click", function () {
 
 // Initial render of the recipes
 renderRecipes();
+function updateWelcomeMessage() {
+    // Retrieve the logged-in user's username from sessionStorage
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
+
+    // Debugging: Check if the username is being retrieved
+    console.log("Logged in user:", loggedInUser);
+
+    // If a user is logged in, update the welcome message
+    if (loggedInUser) {
+      const welcomeHeader = document.querySelector("h1");
+      if (welcomeHeader) {
+        welcomeHeader.textContent = `Welcome to Recipe Sharing Web, ${loggedInUser}!`;
+      }
+    }
+  }
+
+  // Call the function when the page finishes loading
+  document.addEventListener("DOMContentLoaded", updateWelcomeMessage);

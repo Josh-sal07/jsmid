@@ -199,12 +199,30 @@
             const ingredients = document.getElementById("ingredients").value;
             const instructions = document.getElementById("instructions").value;
 
-            // Here you can save or display the recipe details.
+            
             alert(`Thank you for sharing your recipe: ${recipeName}!`);
 
-            // Clear form fields after submission
+     
             document.getElementById("recipeForm").reset();
+
         }
+        function updateWelcomeMessage() {
+   
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
+
+   
+    console.log("Logged in user:", loggedInUser);
+
+    if (loggedInUser) {
+      const welcomeHeader = document.querySelector("h1");
+      if (welcomeHeader) {
+        welcomeHeader.textContent = `Welcome to Recipe Sharing Web, ${loggedInUser}!`;
+      }
+    }
+  }
+
+ 
+  document.addEventListener("DOMContentLoaded", updateWelcomeMessage);
     </script>
 </body>
 </html>

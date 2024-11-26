@@ -19,7 +19,7 @@
       align-items: center;
       height: 100vh;
       background-size: auto;
-      background-image: url(pexels-pixabay-533157.jpg);
+      background-image: url(HD-wallpaper-premium-kitchen-cooking-background.jpg);
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -175,13 +175,125 @@
       backdrop-filter: blur(40px);
       color: rgb(255, 0, 0);
     }
-    .recipe-list{
+    .recipe-list {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      margin-top: 20px;
+  }
+    li{
+      color: white;
     }
+    #recipes {
+      list-style-type: none;
+      padding: 0;
+      width: 80%;
+      max-width: 600px;
+  }
+  .recipe-item {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
+      padding: 15px;
+      color: #333;
+  }
+
+  .recipe-title {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #fffefe;
+  }
+
+  .recipe-description {
+      font-size: 1em;
+      margin-bottom: 15px;
+      color: #ffffff;
+  }
+
+  .recipe-actions {
+      display: flex;
+      gap: 10px;
+  }
+
+  .edit {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  .edit:hover {
+      background-color: #45a049;
+  }
+
+  .delete {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  .delete:hover {
+      background-color: #d32f2f;
+  }
+
+  #clear-button {
+
+      margin: 10px 0;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 170px;
+  }
+
+  #clear-button:hover {
+      background-color: #d32f2f;
+  }
+  .search-bar {
+      width: 80%;
+      max-width: 600px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      background-color: transparent;
+      backdrop-filter: blur(50px);
+  }
+
+  .search-bar input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+  }
+
+  .search-bar button {
+      padding: 10px;
+      font-size: 16px;
+      background-color:  rgb(26, 152, 26);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+
+  .search-bar button:hover {
+      background-color: #45a049;
+  }
+ 
 </style>
 <body>
+  
 
   <header class="head"></header>
   <div class="content">
@@ -232,14 +344,46 @@
             recipes.forEach((recipe, index) => {
                 const listItem = document.createElement("li");
                 listItem.innerHTML = `
-                    <strong>${recipe.name}</strong>: ${recipe.description}
+                   <h3 class="recipe-title">${recipe.name}</h3>
+                <p class="recipe-description">${recipe.description}</p>
+                <div class="recipe-actions">
                     <button class="edit" onclick="editRecipe(${index})">Edit</button>
                     <button class="delete" onclick="deleteRecipe(${index})">Delete</button>
+                </div>
                 `;
                 recipeList.appendChild(listItem);
             });
         }
     }
+
+    function editRecipe(index) {
+    
+    const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+    
+    const selectedRecipe = recipes[index];
+
+    
+    const newName = prompt("Edit Recipe Name:", selectedRecipe.name);
+    const newDescription = prompt("Edit Recipe Description:", selectedRecipe.description);
+
+    
+    if (newName !== null && newName.trim() !== "") {
+        selectedRecipe.name = newName;
+    }
+    if (newDescription !== null && newDescription.trim() !== "") {
+        selectedRecipe.description = newDescription;
+    }
+
+   
+    recipes[index] = selectedRecipe;
+
+    
+    localStorage.setItem("recipes", JSON.stringify(recipes));
+
+    
+    renderRecipes();
+}
 
     
     function deleteRecipe(index) {
@@ -259,6 +403,37 @@
 
 
     renderRecipes();
+
+    function filterRecipes() {
+        const searchInput = document.getElementById("searchInput").value.toLowerCase();
+        const recipeList = document.getElementById("recipes");
+        const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+        const filteredRecipes = recipes.filter(recipe => 
+            recipe.name.toLowerCase().includes(searchInput)
+        );
+
+        recipeList.innerHTML = ""; 
+        filteredRecipes.forEach((recipe, index) => {
+            const listItem = document.createElement("li");
+            listItem.classList.add("recipe-item");
+            listItem.innerHTML = `
+                <h3 class="recipe-title">${recipe.name}</h3>
+                <p class="recipe-description">${recipe.description}</p>
+                <div class="recipe-actions">
+                    <button class="edit" onclick="editRecipe(${index})">Edit</button>
+                    <button class="delete" onclick="deleteRecipe(${index})">Delete</button>
+                </div>
+            `;
+            recipeList.appendChild(listItem);
+        });
+
+        if (filteredRecipes.length === 0) {
+            recipeList.innerHTML = "<p>No recipes found.</p>";
+        }
+    }
+
+    renderRecipes(); 
   </script>
 
 </body>
