@@ -8,21 +8,22 @@
 </head>
 <STYLE>
   .profile-section {
-      width: 30%;
-      padding: 20px;
+      width: 60%;
+      max-width: 500px; /* to prevent it from becoming too wide on large screens */
       background-color: transparent;
-      justify-content: center;
-     
-
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin-top: 20px;
+      margin-left: 350px;
     }
 
     .profile-img {
-      width: 100%;
-      height: auto;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin: 0 auto;
     }
 
     .profile-info {
@@ -31,6 +32,18 @@
 
     .profile-info h3 {
       margin-bottom: 10px;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+      .content {
+        margin-left: 0;
+      }
+
+      .message-section, .profile-section {
+        width: 100%;
+        margin: 0;
+      }
     }
 </STYLE>
 <body>
