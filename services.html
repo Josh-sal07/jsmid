@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Semi-Final</title>
+</head>
+<style>
+   * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-size: auto;
+      background-image: url(pexels-pixabay-533157.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: transparent;
+      color: white;
+      backdrop-filter: blur(50px);
+      position: fixed;
+      left: -250px;
+      top: 0;
+      transition: 0.3s;
+      overflow-y: auto;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-header {
+      padding: 20px;
+      background-color: transparent;
+      backdrop-filter: blur(50px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-header h2 {
+      font-size: 20px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #000000;
+      font-size: 20px;
+      cursor: pointer;
+      text-align: end;
+    }
+    .close-btn :hover{
+      background-color: black;
+      color: white;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      padding: 20px 0;
+    }
+
+    .sidebar-menu li {
+      padding: 15px 20px;
+    }
+
+    .sidebar-menu li a {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #000000;
+      text-decoration: none;
+    }
+
+    .sidebar-menu li a:hover {
+      background-color: #000;
+      color: rgb(255, 255, 255);
+    }
+
+    #add-recipe {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #ffffff;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    input[type="text"] {
+      height: 40px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .open-btn {
+      position: absolute;
+      text-align: start;
+      top: 20px;
+      left: 20px;
+      background-color: transparent;
+      color: #030202;
+      font-size: 2em;
+      cursor: pointer;
+      border: none;
+    }
+
+    .content {
+      margin-left: 0;
+      padding: 10px;
+      color:#121412;
+      transition: margin-left 0.3s;
+      background-color: transparent;
+    }
+    .he{
+      color: #000;
+    }
+    #clear-button{
+      background-color: transparent;
+      backdrop-filter: blur(50px);
+    }
+    .edit{
+      width: 70px;
+      color:rgb(255, 255, 255);
+      background-color: transparent;
+      backdrop-filter: blur(40px);
+    }
+    .delete{
+     
+      width: 70px;
+      margin-top: 5px;
+      background-color: transparent;
+      backdrop-filter: blur(40px);
+      color: rgb(255, 0, 0);
+    }
+    .recipe-list{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+</style>
+<body>
+
+  <header class="head"></header>
+  <div class="content">
+    <button class="open-btn" onclick="toggleSidebar()">☰</button>
+  </div>
+  <div class="recipe-list">
+  <section id="recipe-list">
+    <h2>Recipe List</h2>
+    <button id="clear-button">Clear All Recipes</button>
+    <ul id="recipes"></ul>
+  </section>
+</div>
+
+ 
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <button class="close-btn" onclick="toggleSidebar()">&#10005;</button>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="index2.html">Home</a></li>
+      <li><a href="about.html">Add Recipe</a></li>
+      <li><a href="services.html">List of Recipes</a></li>
+    </ul>
+  </div>
+
+  
+  
+
+  <script>
+    
+    function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("active");
+    }
+
+   
+    function renderRecipes() {
+        const recipeList = document.getElementById("recipes");
+        recipeList.innerHTML = ""; 
+
+   
+        const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+        if (recipes.length === 0) {
+            recipeList.innerHTML = "<p>No recipes available.</p>";
+        } else {
+            
+            recipes.forEach((recipe, index) => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <strong>${recipe.name}</strong>: ${recipe.description}
+                    <button class="edit" onclick="editRecipe(${index})">Edit</button>
+                    <button class="delete" onclick="deleteRecipe(${index})">Delete</button>
+                `;
+                recipeList.appendChild(listItem);
+            });
+        }
+    }
+
+    
+    function deleteRecipe(index) {
+        const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+        recipes.splice(index, 1); 
+        localStorage.setItem("recipes", JSON.stringify(recipes));
+        renderRecipes();
+    }
+
+    
+    document.getElementById("clear-button").addEventListener("click", function () {
+        if (confirm("Are you sure you want to clear all recipes?")) {
+            localStorage.removeItem("recipes"); 
+            renderRecipes(); 
+        }
+    });
+
+
+    renderRecipes();
+  </script>
+
+</body>
+</html>

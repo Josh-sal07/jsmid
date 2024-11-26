@@ -1,94 +1,75 @@
-let currentEditIndex = null;
+// Function to toggle sidebar visibility
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("active");
+}
 
-const addButton = document.getElementById('add-button');
-const recipeList = document.getElementById('recipes');
+// Function for logging out
+function logout() {
+    alert("Logging out...");
+    sessionStorage.removeItem("loggedInUser");
+    window.location.href = "index1.html";  // Assuming "index1.html" is your login page
+}
 
-addButton.addEventListener('click', () => {
-    if (currentEditIndex !== null) {
-        updateRecipe();
+let recipes = []; // Array to hold recipes
+
+// Render the recipes list dynamically
+function renderRecipes() {
+    const recipeList = document.getElementById("recipes");
+    recipeList.innerHTML = ""; // Clear previous list
+
+    recipes.forEach((recipe, index) => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `
+            <strong>${recipe.name}</strong>: ${recipe.description}
+            <button onclick="editRecipe(${index})">Edit</button>
+            <button onclick="deleteRecipe(${index})">Delete</button>
+        `;
+        recipeList.appendChild(listItem);
+    });
+}
+
+// Add a new recipe
+document.getElementById("add-button").addEventListener("click", function () {
+    const recipeName = document.getElementById("recipe-name").value;
+    const recipeDescription = document.getElementById("recipe-description").value;
+
+    if (recipeName && recipeDescription) {
+        recipes.push({ name: recipeName, description: recipeDescription });
+        renderRecipes(); // Re-render the recipes
+        document.getElementById("recipe-name").value = "";
+        document.getElementById("recipe-description").value = "";
     } else {
-        addRecipe();
+        alert("Please fill in both the recipe name and description.");
     }
 });
 
-function addRecipe() {
-    const recipeName = document.getElementById('recipe-name').value;
-    const recipeDescription = document.getElementById('recipe-description').value;
+// Edit an existing recipe
+function editRecipe(index) {
+    const recipe = recipes[index];
+    const newName = prompt("Edit Recipe Name:", recipe.name);
+    const newDescription = prompt("Edit Recipe Description:", recipe.description);
 
-    if (recipeName && recipeDescription) {
-        const listItem = createRecipeElement(recipeName, recipeDescription);
-        recipeList.appendChild(listItem);
-        clearInputs();
+    if (newName && newDescription) {
+        recipes[index] = { name: newName, description: newDescription };
+        renderRecipes();
     } else {
-        alert("Please enter both name and description.");
+        alert("Please enter both a name and description.");
     }
 }
 
-function createRecipeElement(name, description) {
-    const listItem = document.createElement('li');
-    listItem.className = 'recipe-item';
-
-    listItem.innerHTML = `
-        <div>
-            <strong>${name}</strong><br>
-            <p>${description}</p>
-        </div>
-        <div>
-            <button onclick="editRecipe(this)">Edit</button>
-            <button onclick="deleteRecipe(this)">Delete</button>
-        </div>
-    `;
-    return listItem;
+// Delete a recipe
+function deleteRecipe(index) {
+    recipes.splice(index, 1);
+    renderRecipes();
 }
 
-function updateRecipe() {
-    const recipeName = document.getElementById('recipe-name').value;
-    const recipeDescription = document.getElementById('recipe-description').value;
+// Clear all recipes
+document.getElementById("clear-button").addEventListener("click", function () {
+    if (confirm("Are you sure you want to clear all recipes?")) {
+        recipes = [];
+        renderRecipes();
+    }
+});
 
-    const listItem = recipeList.children[currentEditIndex];
-    listItem.innerHTML = `
-        <div>
-            <strong>${recipeName}</strong><br>
-            <p>${recipeDescription}</p>
-        </div>
-        <div>
-            <button onclick="editRecipe(this)">Edit</button>
-            <button onclick="deleteRecipe(this)">Delete</button>
-        </div>
-    `;
-
-    clearInputs();
-    currentEditIndex = null;
-    addButton.textContent = "Add Recipe"; 
-}
-
-function deleteRecipe(button) {
-    const listItem = button.parentElement.parentElement;
-    recipeList.removeChild(listItem);
-}
-
-function editRecipe(button) {
-    const listItem = button.parentElement.parentElement;
-    const recipeName = listItem.querySelector('strong').innerText;
-    const recipeDescription = listItem.querySelector('p').innerText;
-
-    document.getElementById('recipe-name').value = recipeName;
-    document.getElementById('recipe-description').value = recipeDescription;
-
-    currentEditIndex = Array.from(recipeList.children).indexOf(listItem);
-    addButton.textContent = "Update Recipe"; 
-}
-
-function clearInputs() {
-    document.getElementById('recipe-name').value = '';
-    document.getElementById('recipe-description').value = '';
-}
-function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    sidebar.classList.toggle("active");
-  }
-  function logout() {
-    alert("Logging out...");
-    sessionStorage.removeItem("loggedInUser");
-    window.location.href = "index1.html";
-}
+// Initial render of the recipes
+renderRecipes();

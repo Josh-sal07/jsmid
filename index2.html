@@ -6,37 +6,87 @@
   <title>Semi-Final</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+<STYLE>
+  .profile-section {
+      width: 30%;
+      padding: 20px;
+      background-color: transparent;
+      justify-content: center;
+     
+
+    }
+
+    .profile-img {
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-info {
+      margin-top: 20px;
+    }
+
+    .profile-info h3 {
+      margin-bottom: 10px;
+    }
+</STYLE>
 <body>
 
+  
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h2>Menu</h2>
       <button class="close-btn" onclick="toggleSidebar()">&#10005;</button>
     </div>
     <ul class="sidebar-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">Add Recipe</a></li>
+        <li><a href="services.html">List of Recipes</a></li>
     </ul>
   </div>
 
+
   <div class="content">
     <button class="open-btn" onclick="toggleSidebar()">☰</button>
-    <h1>Welcome to my Homepage</h1>
+    <h1>Welcome to Recipe Sharing Web</h1>
+
+    
+    <div class="message-section">
+      <p>
+        Welcome to our Recipe Sharing Web! We are excited to have you here. Our platform is designed to bring food lovers together, sharing delicious recipes from all around the world. Whether you're an experienced chef or someone who loves trying out new dishes, you’ll find a variety of recipes to suit your taste.
+      </p>
+      <p>
+        Our mission is to inspire people to cook more and share their cooking experiences. By contributing your recipes, you not only help others discover new dishes, but you also become a part of a larger community of food enthusiasts. Join us in our journey to make cooking fun and accessible to all!
+      </p>
+      <p>
+        On our platform, you can browse through an extensive list of recipes, categorized by cuisine, difficulty, and more. You can also add your own recipes, complete with photos, ingredients, and cooking instructions. It’s easy, and best of all, it’s free!
+      </p>
+      <p>
+        We believe in the power of sharing. Food has the ability to connect people, create memories, and inspire creativity. Whether you're cooking for your family, friends, or simply trying something new on your own, every dish has a story to tell.
+      </p>
+      <p>
+        Thank you for being part of our community. We can’t wait to see the amazing recipes you’ll share with us. Let’s get cooking!
+      </p>
+    </div>
+
+    
+    <div class="profile-section">
+      <h2>Founder of this website</h2>
+      <img src="joshua.jpg" alt="Profile Photo" class="profile-img">
+      <div class="profile-info">
+        <h3 style="color: black;">JOSHUA SALABE</h3>
+        <p>Food Enthusiast & Chef</p>
+        <p>I love experimenting with different cuisines and sharing my culinary creations. Cooking is my passion, and I enjoy helping others find new recipes to try!</p>
+      </div>
+    </div>
   </div>
-  <section class="home-welcome">
-    <a href="services.html" class="cta-btn">Explore Our Services</a>
-  </section>
-  <section class="cta">
-    <a href="contact.html" class="cta-btn">Contact Us</a>
-  </section>
-  
+
+ 
   <footer class="footer">
     <button class="logout-btn" onclick="logout()">Logout</button>
   </footer>
-
- 
   <script src="script.js"></script>
 </body>
 </html>
